@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Mathematical definition of the Placido irregularity indices</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Mathematical definition of the Placido irregularity indices</h1>
+
+
+
+<p>The <strong>rPACI</strong> package can read corneal topography files and then analyze them. This analysis includes the computation of some Placido irregularity indices. The indices computed by <strong>rPACI</strong> allow to discriminate between normal and irregular corneas. Most of them were introduced and validated with real datasets in the scientific publications <span class="citation">Ramos-López et al. (2011)</span> and <span class="citation">Ramos-López et al. (2013)</span>. An additional index, based on a naive Bayes classifier, was proposed later, and tested with a different database, in <span class="citation">Castro-Luna, Martínez-Finkelshtein, and Ramos-López (2020)</span>. In these papers, all indices demonstrated a good sensitivity for the detection of keratoconus, a corneal disease.</p>
+<p>The purpose of this vignette is to explain the mathematical definition and the meaning of the indices given by <strong>rPACI</strong>. They can be split into two categories: primary and combined indices. The primary indices are: <span class="math inline">\(PI_1\)</span>, <span class="math inline">\(PI_2\)</span>, <span class="math inline">\(PI_3\)</span>, <span class="math inline">\(SL\)</span>, <span class="math inline">\(AR_1\)</span>, <span class="math inline">\(AR_2\)</span>, <span class="math inline">\(AR_3\)</span>, <span class="math inline">\(AR_4\)</span>, <span class="math inline">\(AR_5\)</span>. They all measure certain geometrical properties of the data distribution. Based on them, other combined indices are computed: <span class="math inline">\(GLPI\)</span> (a generalized linear model) and <span class="math inline">\(NBI\)</span> (naive Bayes index).</p>
+<div id="data-structure" class="section level2">
+<h2>Data structure</h2>
+<p>First, we assume a <code>data.frame</code> with corneal data is already available, which may have been loaded from a file using the function <code>readFile</code> (see <a href="packageUsage.html">Workflow of rPACI pacakge</a>), simulated using <code>simulateData</code> (see <a href="simulating.html">Simulating corneal datasets</a>), or by other ways (as long as it meets the dataset requirements below).</p>
+<p>The dataset consists of three columns: x, y (with the X and Y Cartesian coordinates of data points), and ring index (1, 2, …). The number of rows (number of data points) in the dataset depends on the data availability (<code>readFile</code> by default only reads complete rings, and <code>simulateData</code> also simulates complete rings), and the chosen number of innermost rings to use (an optional parameter for <code>readFile</code>, 15 by default).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">=</span> <span class="fu">simulateData</span>(<span class="at">rings =</span> <span class="dv">13</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(dataset<span class="sc">$</span>x,dataset<span class="sc">$</span>y)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>If <span class="math inline">\(N\)</span> is the number of complete rings to be used and <span class="math inline">\(N_A\)</span> is the number of points per ring (in the example, <span class="math inline">\(N=13\)</span> and <span class="math inline">\(N_A=256\)</span>, its default value), the format in <code>dataset</code> is the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th>x</th>
+<th>y</th>
+<th>ring index</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(y_1\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_2\)</span></td>
+<td><span class="math inline">\(y_2\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_3\)</span></td>
+<td><span class="math inline">\(y_3\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{N_A}\)</span></td>
+<td><span class="math inline">\(y_{N_A}\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{(N_A+1)}\)</span></td>
+<td><span class="math inline">\(y_{(N_A+1)}\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{(N_A+2)}\)</span></td>
+<td><span class="math inline">\(y_{(N_A+2)}\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{(2 N_A)}\)</span></td>
+<td><span class="math inline">\(y_{(2 N_A)}\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{((N-1) \times N_A + 1)}\)</span></td>
+<td><span class="math inline">\(y_{((N-1) \times N_A + 1)}\)</span></td>
+<td><span class="math inline">\(N\)</span></td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{(N \times N_A)}\)</span></td>
+<td><span class="math inline">\(y_{(N \times N_A)}\)</span></td>
+<td><span class="math inline">\(N\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>There are <span class="math inline">\(N_A\)</span> rows per ring (<span class="math inline">\(N\)</span> rings), and thus, a total of <span class="math inline">\(N \times N_A\)</span> data points (in the example, <span class="math inline">\(N \times N_A = 13 \times 256 = 3328\)</span>). The dataset shall not contain missing data (this is guaranteed if using <code>readFile</code> with default parameters or <code>simulateData</code>).</p>
+<p>Thus, we have <span class="math inline">\(N \times N_A\)</span> data points corresponding to <span class="math inline">\(N\)</span> complete rings, given in Cartesian coordinates. Let us define <span class="math inline">\(R_k\)</span>, the set of points belonging to the <span class="math inline">\(k\)</span>-th ring/mire (from the inside out) and <span class="math inline">\(k \in \{1, \dots, N\}\)</span> is the ring index. Then, a single data point <span class="math inline">\(P_j=( x_j, y_j )\)</span> (corresponding to the j-th row of the dataframe) belongs to <span class="math inline">\(R_k\)</span>, i.e., <span class="math inline">\(P_j \in R_k\)</span> if <span class="math inline">\(j \in J_k\)</span>, <span class="math inline">\(J_k:=\{ n_k, n_k+1, ..., n_k+(N_A-1) \}\)</span>, with <span class="math inline">\(n_k = 1+N_A(k-1)\)</span> (<span class="math inline">\(J_k\)</span> is the set of indices <span class="math inline">\(j\)</span> which correspond to the <span class="math inline">\(k\)</span>-th mire <span class="math inline">\(R_k\)</span>, and <span class="math inline">\(n_k\)</span> is the first (smallest) of them).</p>
+</div>
+<div id="primary-indices" class="section level2">
+<h2>Primary indices</h2>
+<!-- Several indices of corneal irregularity can be calculated from the raw measurements of a Placido disk corneal topographer (@dramoslopez2011, @dramoslopez2013). Many other similar indices exist -->
+<!-- \citep{Alio2016, Prakash2012, Maeda1994, Rabinowitz1999, Issarti2019, Buehren2010}, -->
+<!-- but they cannot be computed using just the raw data of a Placido topographer, as they require besides altimetry, pachymetry, or curvature data, information about both surfaces of the cornea, or other parameters.  -->
+<!-- The Placido indices or metrics based on the raw ring images have demonstrated their ability in diagnosing clinical diseases such as keratoconus and subclinical keratoconus, showing high accuracy (@dramoslopez2011, @dramoslopez2013, @castroluna2020). For the readers' convenience, a brief summary of those indices is reported below (more details and derivations can be found in those references). -->
+<p>The first step to calculate the indices is to compute the best-fitting circle (with center <span class="math inline">\(C_k\)</span> and (average) radius <span class="math inline">\(AR_k\)</span>) for each ring, with <span class="math inline">\(k \in \{1, \dots, N\}\)</span>. This is done by least-squares fitting of a general circle equation to the Cartesian coordinates of data points in ring <span class="math inline">\(k\)</span> and then, the geometrical parameters (center and radius) are computed from the coefficients (see <span class="citation">Ahn, Rauh, and Warnecke (2001)</span> and <span class="citation">Ramos-López et al. (2011)</span> for more details). These centers and radii contain information about the displacement or off-centering of the mires, as well as their size and regularity. A high level of drift or variability in these parameters is a signal of corneal irregularity (<span class="citation">Ramos-López et al. (2011)</span>).</p>
+<p>From the best-fitting circle centers <span class="math inline">\(C_k\)</span>, <span class="math inline">\(k \in \{1, \dots, N\}\)</span>, a regression line can be adjusted to their coordinates (<span class="math inline">\(y\)</span> over <span class="math inline">\(x\)</span>), yielding a slope <span class="math inline">\(m\)</span> and an intercept (which is not used). This line contains information about the direction of the displacement of the centers, which can be a signal of keratoconus (more specifically, the upper-bottom or north-south asymmetry is a marker for keratoconus, see <span class="citation">Ramos-López et al. (2013)</span>).</p>
+<p>One can find also the best-fitting ellipses (with centers <span class="math inline">\(\tilde{C}_k\)</span> and axis ratio <span class="math inline">\(c_k\)</span>, i.e., ratio or quotient between the major and the minor axis) for each ring (<span class="math inline">\(k \in \{1, \dots, N\}\)</span>). This process is also based on a least-squares fit of the general ellipse equation to the Cartesian coordinates of data points of mire <span class="math inline">\(k\)</span> (see <span class="citation">Ahn, Rauh, and Warnecke (2001)</span> and <span class="citation">Ramos-López et al. (2011)</span> for more details). A high level of variability in the axis ratio is also a signal of corneal irregularity (<span class="citation">Ramos-López et al. (2011)</span>).</p>
+<p>Using the quantities, we can define four corneal irregularity indices, labeled as <span class="math inline">\(PI_1, PI_2, PI_3\)</span> (from <em>Placido Irregularity indices</em>) and <span class="math inline">\(SL\)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
+<ul>
+<li><p><span class="math inline">\(PI_1\)</span> <span class="math display">\[ PI_1  = \frac{1}{N} \max_{1 \leq n,m \leq N}{ \|C_n - C_m \| } \]</span> This index measures the diameter of the set of centers <span class="math inline">\(C_k\)</span> (normalized by the total number of rings <span class="math inline">\(N\)</span>), where <span class="math inline">\(\| \cdot \|\)</span> is the standard Euclidean norm in <span class="math inline">\(\mathbb R^2\)</span>. A high value of this index shows a large displacement or off-centering between the mires.</p></li>
+<li><p><span class="math inline">\(PI_2\)</span> <span class="math display">\[ PI_2 = \frac{1}{N-1} \sum_{1 \leq n \leq N-1}{ \|C_{n+1} - C_{n} \| } \]</span> corresponds to the total length of the path connecting consecutive centers. <span class="math inline">\(PI_2\)</span> measures the accumulated drift between each pair of mires. In some cases, <span class="math inline">\(PI_1\)</span> (diameter) can be relatively small but the centers drift a lot from a mire to the next. <span class="math inline">\(PI_2\)</span> is able to capture this kind of irregularity, which is an abnormal sign.</p></li>
+<li><p><span class="math inline">\(PI_3\)</span> <span class="math display">\[ PI_3   =   \sqrt{ \frac{1}{N} \sum_{1 \leq k \leq N} { (c_k - \overline{c})^2 } }, \quad \text{where} \quad  \overline{c}=\frac{1}{N} \sum_{1 \leq k \leq N}  c_k \]</span> is the standard deviation of the distribution of axis ratios, so that it measures the variability of the axis ratios or eccentricities of the individual rings. A large value of <span class="math inline">\(PI_3\)</span> indicates a high variability in the shapes of the rings, and thus it is a signal of irregularity.</p></li>
+<li><p><span class="math inline">\(SL\)</span> <span class="math display">\[ SL = |m| \]</span> is the absolute value of the slope of the best-fitting line to the coordinates of the centers <span class="math inline">\(C_k\)</span>. High values of this index correspond to vertical mire displacements whereas low values correspond to horizontal displacements.</p></li>
+</ul>
+<p>Apart from these 4 indices, we also take as irregularity indices the values of <span class="math inline">\(AR_k\)</span> (average radius of the <span class="math inline">\(k\)</span>-th ring) corresponding to the first (innermost) 5 rings. These values also showed a certain sensitivity for detecting keratoconus (<span class="citation">Ramos-López et al. (2011)</span>).</p>
+<div id="normalization-of-the-primary-indices" class="section level3">
+<h3>Normalization of the primary indices</h3>
+<p>In order to obtain indices with values in the same range (more easily comparable and to prevent scale problems when combining them), a normalization of each primary index was performed (<span class="citation">Ramos-López et al. (2011)</span> and <span class="citation">Ramos-López et al. (2013)</span>). To do it, these indices were tested on a real dataset of corneas of different conditions. Then, their values were linearly translated to <span class="math inline">\([0,100]\)</span>, so that the value corresponding to the best possible condition (less irregularity) was transformed to <span class="math inline">\(0\)</span>, and the worst (more irregularity) to <span class="math inline">\(100\)</span>. Therefore, in the test dataset, the values of all primary indices were between <span class="math inline">\(0\)</span> (best-case) and <span class="math inline">\(100\)</span> (worst-case).</p>
+<p>In practice, after the transformation, most index values for any cornea will be in <span class="math inline">\([0,100]\)</span>, but in some particular cases, they may be outside that interval. To facilitate their interpretation, we can assume that values below zero correspond to zero, and the maximum irregularity is attained at a certain value (e.g. 150, this value is discussed in <span class="citation">Ramos-López et al. (2011)</span>).</p>
+<p>The normalization coefficients used in the previous studies (<span class="citation">Ramos-López et al. (2011)</span> and <span class="citation">Ramos-López et al. (2013)</span>) were the following (for notation simplicity, values on the left-hand side of the expressions represent normalized values whereas values on the right-hand side are values before the normalization (as computed by their definitions above)):</p>
+<p><span class="math display">\[ PI_1 = 12368.3980719706  PI_1 - 12.5200561911951 \]</span> <span class="math display">\[ PI_2 = 9699.23915314471 PI_2 - 18.2916611541283\]</span> <span class="math display">\[ PI_3 = 5233.70399537826 PI_3 - 13.7375152045819\]</span> <span class="math display">\[ SL = 50 SL\]</span></p>
+<p><span class="math display">\[ AR_1 = -1961.92346976023 AR_1 + 444.770836424576 \]</span> <span class="math display">\[ AR_2 = -562.8465909984122 AR_2 + 279.7430721547980 \]</span> <span class="math display">\[ AR_3 = -486.9218093835968 AR_3 + 331.3137688964757 \]</span> <span class="math display">\[ AR_4 = -318.192614292727 AR_4 + 298.064078007947 \]</span> <span class="math display">\[ AR_5 = -288.4037960143595 AR_5 + 321.4180137915255 \]</span></p>
+<p>Thus, after the normalization (and possible truncation of extremely high or low values), all indices values lay in <span class="math inline">\([0,150]\)</span>, with <span class="math inline">\(0\)</span> corresponding to the most normal case and <span class="math inline">\(150\)</span> to the most irregular case. This value of <span class="math inline">\(150\)</span> is arbitrary and could be changed (increased or lowered), but we found it performed well in practice (<span class="citation">Ramos-López et al. (2011)</span> and <span class="citation">Ramos-López et al. (2013)</span>).</p>
+</div>
+</div>
+<div id="combined-indices" class="section level2">
+<h2>Combined indices</h2>
+<p>The primary Placido indices described above, <span class="math inline">\(PI_1\)</span>, <span class="math inline">\(PI_2\)</span>, <span class="math inline">\(PI_3\)</span>, <span class="math inline">\(SL\)</span>, and <span class="math inline">\(AR_k\)</span>, show sensitivity to detecting various irregularities in the cornea, such as keratoconus (<span class="citation">Ramos-López et al. (2011)</span>, <span class="citation">Ramos-López et al. (2013)</span>). However, a single index does not reach sufficient accuracy in the task, and compound indices have been proposed and tested (<span class="citation">Ramos-López et al. (2013)</span>, <span class="citation">Castro-Luna, Martínez-Finkelshtein, and Ramos-López (2020)</span>) in order to improve the performance and precision of the individual indices. These compound indices showed a significant improvement in accuracy when predicting keratoconus.</p>
+<p>A brief description of them is given as follows (see the aforementioned references for more details):</p>
+<div id="glpi-index" class="section level3">
+<h3>GLPI index</h3>
+<p>The <span class="math inline">\(GLPI\)</span> index (from Generalized Linear Placido Index) (<span class="citation">Ramos-López et al. (2013)</span>) is a generalized linear model computed using some of the primary indices, in the following way: <span class="math display">\[ GLPI = 100 \Phi \left( \left(-224.90 + 1.69 PI_1 + 1.28 PI_3 + 1.89 AR(4) + 0.19 SL \right)/20 \right) \]</span></p>
+<p>where <span class="math inline">\(\Phi\)</span> stands for the cumulative distribution function of the standard normal distribution. This corresponds to a generalized linear regression model with the <em>probit</em> (<span class="math inline">\(\Phi^{-1}\)</span>) link function. Therefore, <span class="math inline">\(GLPI\)</span> has values between <span class="math inline">\(0\)</span> and <span class="math inline">\(100\)</span>. The coefficients in the formula above were obtained by fitting a real-world dataset of normal and keratoconic corneas (<span class="citation">Ramos-López et al. (2013)</span>). The index <span class="math inline">\(GLPI\)</span> was validated giving an excellent discrimination capability of irregular corneas.</p>
+</div>
+<div id="nbi-index" class="section level3">
+<h3>NBI index</h3>
+<p>The compound index <span class="math inline">\(NBI\)</span> (from Naive Bayes Index), introduced in <span class="citation">Castro-Luna, Martínez-Finkelshtein, and Ramos-López (2020)</span>, is a Bayesian classifier. More precisely, it is a Bayesian network with the naïve Bayes structure depicted below.</p>
+<p><img src="data:image/png;base64,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" /></p>
+<p>This Bayesian network is a conditional linear Gaussian (CLG) network, with its root node (<span class="math inline">\(KC\)</span>) being a discrete binary variable and the rest of the nodes (which are some of the primary indices introduced above) being continuous. The parameters of the model (their conditional probability distributions) were reported in <span class="citation">Castro-Luna, Martínez-Finkelshtein, and Ramos-López (2020)</span>. This model can be used for predicting whether a specific cornea (whose values of the primary indices are known) is a normal cornea or a keratoconic cornea.</p>
+<p>Moreover, the probability of being one type or another can be computed as well, either using exact inference or approximate inference with algorithms such as evidence weighting, likelihood weighting, or more generally, importance sampling (<span class="citation">Cheng and Druzdel (2000)</span>). Even though exact inference is feasible in this case, approximate inference is easier to implement and to generalize to more complex network structures. In a nutshell, these algorithms consist of simulating a large number of samples from the network, according to the evidence (i.e., variable values that are known a priori), and averaging their likelihoods to estimate the probability of each state of the target variable (in this case, <span class="math inline">\(KC\)</span>). For a deeper explanation, we refer the readers to <span class="citation">Castro-Luna, Martínez-Finkelshtein, and Ramos-López (2020)</span> and its references.</p>
+<p>Thus, the posterior probability estimation can be computed efficiently with several approaches. In <strong>rPACI</strong>, we make use of the R package <a href="https://cran.r-project.org/package=bnlearn"><strong>bnlearn</strong></a> (<span class="citation">Scutari (2010)</span>), which includes an implementation of the likelihood weighting algorithm, for computing the index NBI from the primary indices values of the bottom nodes.</p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-ahn2001" class="csl-entry">
+Ahn, Sung Joon, Wolfgang Rauh, and Hans-Jürgen Warnecke. 2001. <span>“Least-Squares Orthogonal Distances Fitting of Circle, Sphere, Ellipse, Hyperbola, and Parabola.”</span> <em>Pattern Recognition</em> 34 (12): 2283–303. <a href="https://doi.org/10.1016/S0031-3203(00)00152-7">https://doi.org/10.1016/S0031-3203(00)00152-7</a>.
+</div>
+<div id="ref-castroluna2020" class="csl-entry">
+Castro-Luna, Gracia M., Andrei Martínez-Finkelshtein, and Darío Ramos-López. 2020. <span>“Robust Keratoconus Detection with Bayesian Network Classifier for Placido Based Corneal Indices.”</span> <em>Contact Lens and Anterior Eye</em> 43 (4): 366–72. <a href="https://doi.org/10.1016/j.clae.2019.12.006">https://doi.org/10.1016/j.clae.2019.12.006</a>.
+</div>
+<div id="ref-cheng2000" class="csl-entry">
+Cheng, Jian, and Marek J. Druzdel. 2000. <span>“AIS-BN: An Adaptive Importance Sampling Algorithm for Evidential Reasoning in Large Bayesian Networks.”</span> <em>Journal of Artificial Intelligence Research</em> 13 (1): 155–88. <a href="https://doi.org/10.1613/jair.764">https://doi.org/10.1613/jair.764</a>.
+</div>
+<div id="ref-dramoslopez2013" class="csl-entry">
+Ramos-López, Darío, Andrei Martínez-Finkelshtein, Gracia M. Castro-Luna, Neus Burguera-Giménez, Alfredo Vega-Estrada, David Piñero, and Jorge L. Alió. 2013. <span>“Screening Subclinical Keratoconus with Placido-Based Corneal Indices.”</span> <em>Optometry and Vision Science</em> 90 (4): 335–43. <a href="https://doi.org/10.1097/opx.0b013e3182843f2a">https://doi.org/10.1097/opx.0b013e3182843f2a</a>.
+</div>
+<div id="ref-dramoslopez2011" class="csl-entry">
+Ramos-López, Darío, Andrei Martínez-Finkelshtein, Gracia M. Castro-Luna, David Piñero, and Jorge L. Alió. 2011. <span>“Placido-Based Indices of Corneal Irregularity.”</span> <em>Optometry and Vision Science</em> 88 (10): 1220–31. <a href="https://doi.org/10.1097/opx.0b013e3182279ff8">https://doi.org/10.1097/opx.0b013e3182279ff8</a>.
+</div>
+<div id="ref-scutari2010" class="csl-entry">
+Scutari, Marco. 2010. <span>“Learning Bayesian Networks with the Bnlearn R Package.”</span> <em>Journal of Statistical Software</em> 35 (3): 1–22. <a href="https://doi.org/10.18637/jss.v035.i03">https://doi.org/10.18637/jss.v035.i03</a>.
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The index <span class="math inline">\(SL\)</span> (introduced in <span class="citation">Ramos-López et al. (2013)</span>) is not called <span class="math inline">\(PI_4\)</span> to prevent misunderstandings, since an index of that name was previously defined in <span class="citation">Ramos-López et al. (2011)</span><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

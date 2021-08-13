@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Corneal topographers and data formats</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Corneal topographers and data formats</h1>
+
+
+
+<p>The cornea is the external (outermost) part of the eye, and it is responsible for most of the eye’s refractive power. Given its importance in vision, its analysis is especially important in clinical ophthalmology, since it can be affected by several diseases (e.g., keratoconus). Besides, refractive surgery to correct vision defects acts on the cornea, changing its curvature. Thus, the correct analysis and diagnosis of the cornea are crucial for practitioners (<span class="citation">Fan et al. (2018)</span>).</p>
+<p>Corneal topography (<span class="citation">Rowsey, Reynolds, and Brown (1981)</span>, <span class="citation">Piñero (2015)</span>, <span class="citation">Fan et al. (2018)</span>) refers to the measurement of the corneal surface shape using an automated device, which is called a corneal topographer. Most corneal topographers used in clinical practice rely on the Placido disk technology (either alone or in combination with others, such as the Scheimpflug camera) (<span class="citation">Piñero (2015)</span>, <span class="citation">Samapunphong and Azar (1998)</span>). In a Placido disk topographer, an illuminated pattern of concentric rings (which is the actual Placido disk) is projected into the corneal surface, and its reflection on the anterior surface of the cornea is captured by a camera situated at the center of the system. The picture is then digitized along a certain number of radii at equally spaced angles (<span class="citation">Samapunphong and Azar (1998)</span>, <span class="citation">Espinosa et al. (2013)</span>).</p>
+<p>There are two basic magnitudes: the number of rings in the actual Placido disk <span class="math inline">\(N_R\)</span>, which is projected into the eye, and the number of angles <span class="math inline">\(N_A\)</span> (or number of points per rings) in the digitization process. These may vary from a device to another. The plain coordinates of the points (x and y) are the primary information given by the topographers. Afterward, they usually post-process the data to obtain a third coordinate (z), yielding altimetric (elevation) or curvature data, and provide color maps and other easy-to-interpret indices to the practitioner. In some topographers, the raw measurements can be exported as a structured text file.</p>
+<p>For a deeper insight about these and other related topics (corneal topography, Placido disk technology, keratoconus, …), we refer the reader to the references at the bottom, or to the websites by <a href="https://webeye.ophth.uiowa.edu/eyeforum/tutorials/Corneal-Imaging/Index.htm">University of Iowa Health Care</a> and <a href="https://eyewiki.aao.org/Corneal_Topography">American Academy of Ophthalmology</a>.</p>
+<div id="commercial-topographers-using-the-placido-disk" class="section level2">
+<h2>Commercial topographers using the Placido disk</h2>
+<p>Next, we give a (non-exhaustive) list of corneal topographers that use the Placido disk technology. Some of these devices are also called aberrometers or tomographers (as they also include other technologies than the Placido-disk), or even keratometers or corneal analyzers. This list has been elaborated with publicly available information or reported in scientific papers. Some manufacturers are: <a href="https://www.csoitalia.it">CSO</a> (Firenze, Italy), <a href="http://www.gaushmedical.com/">Gaush</a> (Beijing, China), <a href="https://medmont.com.au/">Medmont</a> (Victoria, Australia), <a href="https://www.nidek-intl.com">Nidek</a> (Aichi, Japan), <a href="https://www.optikon.it">Optikon</a> (Roma, Italy), <a href="https://topconhealthcare.com/">Topcon</a> (Tokyo, Japan), <a href="https://www.zeiss.com/corporate/int/home.html">Zeiss</a> (Oberkochen, Germany), and <a href="https://www.ziemergroup.com">Ziemer</a> (Port, Switzerland).</p>
+<p><strong>Disclaimer</strong>: The authors do not have any commercial nor financial interest in the manufacturers reported here or in any other corneal topography companies. Any reliable information about additional manufacturers or topographers will be welcome and incorporated into this documentation.</p>
+<p>Information about the number of rings and the total number of points measured is also included, when available. We also calculate or estimate the number of points per ring, as the ratio between the two previous quantities, when this data was not reported directly. Notice that the technical features, user operating manual, or other detailed information are generally not public for a particular topographer (sometimes, not even what kind of technology they use).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Manufacturer</th>
+<th>Device</th>
+<th>Placido disk rings</th>
+<th>Measured points<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></th>
+<th>Points per ring<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CSO</td>
+<td>EyeTop2005</td>
+<td>24</td>
+<td>6144</td>
+<td>256</td>
+</tr>
+<tr class="even">
+<td>CSO</td>
+<td><a href="https://www.deviceoptical.com/pd-cso-antares-topographer.cfm">Antares</a></td>
+<td>24</td>
+<td>6144</td>
+<td>256</td>
+</tr>
+<tr class="odd">
+<td>CSO</td>
+<td><a href="https://www.csoitalia.it/en/prodotto/info/35-modi-2">MODI’2</a></td>
+<td>24</td>
+<td>6144</td>
+<td>256</td>
+</tr>
+<tr class="even">
+<td>CSO</td>
+<td><a href="https://www.csoitalia.it/en/prodotto/info/61-osiris-t">Osiris-T</a></td>
+<td>22</td>
+<td>5632</td>
+<td>256</td>
+</tr>
+<tr class="odd">
+<td>CSO</td>
+<td>Sirius</td>
+<td>22</td>
+<td>&gt;=21632</td>
+<td>~1000</td>
+</tr>
+<tr class="even">
+<td>CSO</td>
+<td><a href="https://www.csoitalia.it/en/prodotto/info/73-sirius-">Sirius+</a></td>
+<td>22</td>
+<td>&gt;=42032</td>
+<td>~2000</td>
+</tr>
+<tr class="odd">
+<td>CSO</td>
+<td><a href="https://www.csoitalia.it/en/prodotto/info/63-ms-39">MS-39</a></td>
+<td>22</td>
+<td>31232</td>
+<td>~1420</td>
+</tr>
+<tr class="even">
+<td>Gaush</td>
+<td><a href="http://www.gaushmedical.com/enwap/productd-393.html">TOKA CT-6</a></td>
+<td>29</td>
+<td>10440</td>
+<td>360</td>
+</tr>
+<tr class="odd">
+<td>Medmont</td>
+<td><a href="https://medmont.com.au/e300-corneal-topographer/">Medmont E300</a></td>
+<td>32</td>
+<td>9600</td>
+<td>300</td>
+</tr>
+<tr class="even">
+<td>Nidek</td>
+<td><a href="https://www.nidek-intl.com/product/ophthaloptom/diagnostic/dia_cornea/opd-scan3.html">OPD-Scan III</a></td>
+<td>33</td>
+<td>11880</td>
+<td>360</td>
+</tr>
+<tr class="odd">
+<td>Optikon</td>
+<td><a href="https://www.optikon.it/index/products-details/l/en/p/corneal-keratron-nova">Keratron Nova</a></td>
+<td>28</td>
+<td>7168</td>
+<td>256</td>
+</tr>
+<tr class="even">
+<td>Topcon</td>
+<td><a href="https://topconhealthcare.com/products/kr-800pa/">KR-800PA</a></td>
+<td>10</td>
+<td>3960</td>
+<td>396</td>
+</tr>
+<tr class="odd">
+<td>Topcon</td>
+<td><a href="https://topconhealthcare.com/products/kr-1w/">KR-1W</a></td>
+<td>19</td>
+<td>6840</td>
+<td>360</td>
+</tr>
+<tr class="even">
+<td>Topcon</td>
+<td><a href="https://topconhealthcare.com/products/ca-800/">CA-800</a></td>
+<td>24</td>
+<td>6200</td>
+<td>~260</td>
+</tr>
+<tr class="odd">
+<td>Topcon</td>
+<td><a href="https://topconhealthcare.com/products/aladdin-hw-3-0/">Aladdin</a></td>
+<td>24</td>
+<td>6200</td>
+<td>~260</td>
+</tr>
+<tr class="even">
+<td>Zeiss</td>
+<td><a href="https://www.zeiss.com/meditec/us/products/ophthalmology-optometry/laser-vision-correction/cornea-diagnostics/corneal-topography-system/atlas-9000.html">Atlas 9000</a></td>
+<td>22</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr class="odd">
+<td>Ziemer</td>
+<td><a href="https://www.ziemergroup.com/en/products/galilei/">Galilei G4</a></td>
+<td>20</td>
+<td>? (up to 100000)</td>
+<td>? (~5000)</td>
+</tr>
+<tr class="even">
+<td>Ziemer</td>
+<td><a href="https://www.ziemergroup.com/en/products/galilei/">Galilei G6</a></td>
+<td>20</td>
+<td>? (up to 100000)</td>
+<td>? (~5000)</td>
+</tr>
+</tbody>
+</table>
+<p>It is important to notice that irregularity indices in <strong>rPACI</strong> require a <em>raw</em> measurement, i.e., the data points obtained before any internal processing, interpolation, or resampling. Since most technical documentation is not public, we cannot assure if all these devices allow exporting the raw measurements. Please consult the user operating manual to determine it, or ask the manufacturer’s technical support.</p>
+</div>
+<div id="export-data-from-a-topographer" class="section level2">
+<h2>Export data from a topographer</h2>
+<p>In this section, we give some general hints about data exportation from a corneal topographer. Due to the lack of public documentation on the topic, the variety of topographers and manufacturers, and their use of proprietary software with copyright restrictions, giving more detailed information about the process of data exportation becomes unfeasible. If necessary, please consult the topographer’s user operating manual, or ask the manufacturer’s technical support.</p>
+<p>Most commercial topographers use proprietary, black-box software, specially designed to facilitate the practitioners’ work. They normally use a GUI (Graphical User Interface) to interact with the user, or more specifically, a WIMP system (from Windows, Icons, Menus, Pointer). Among the options available in the different topographer’s menus, some commercial devices offer the possibility of exporting data, previously obtained from a corneal measurement. These options may appear in the menus related to database management, data export/import, save or save as, I/O, backup, external copy, or other similar terms. If necessary, please consult the topographer’s user operating manual, or ask the manufacturer’s technical support.</p>
+<p>In the case of CSO topographers (this may apply to other manufacturers as well), during the raw data exportation process, the user is asked whether to store altimetry/elevations, axial curvatures, or diopters (z coordinate). For its use in <strong>rPACI</strong>, the chosen magnitude is not important, since the information required by the package are the flat positions of the measured points (2D: x and y), and the third coordinate (z) is not used (<span class="citation">Ramos-López et al. (2011)</span>, <span class="citation">Ramos-López et al. (2013)</span>).</p>
+<p>If you have data from another Placido-based corneal topographer that do not fit the formats explained below, you can try to convert the data to fit any of them, or ask us to make a new specific reading function for them (to do that, please open an issue through the <a href="https://github.com/dariorlual/rPACI"><strong>rPACI</strong>’s GitHub repository</a>).</p>
+</div>
+<div id="data-file-formats-read-by-rpaci" class="section level2">
+<h2>Data file formats read by rPACI</h2>
+<p>The <strong>rPACI</strong> package is able to read corneal topography files in two different formats, by now. It will possibly be expanded in the future allowing formats used by other manufacturers. The first file format is basically the one employed by <a href="https://www.csoitalia.it">CSO</a> topographers, but with some more flexibility. The second file format has the structure used internally by <strong>rPACI</strong>. It has been developed to manage directly the datasets handled by the package, allowing to save and read data easily. These two formats are described in the next subsections.</p>
+<p>Notice that <strong>rPACI</strong> also includes the general function <code>readFile</code> (which is the one recommended to use by default), which can deal with both file formats. This function internally determines the format of the specified file, and then it applies either <code>readCSO</code> or <code>readrPACI</code> if possible, or else it throws an error (if none can be applied, when the file format does not fit any of these two formats). All this process is transparent to the user, so that using <code>readFile</code> with one file type or another is done in the same way, and it produces the same results.</p>
+<p>Additional details about using the <strong>rPACI</strong>’s reading functions can be found in <a href="packageUsage.html">Workflow of the rPACI package</a>.</p>
+<div id="cso-topographers-format" class="section level3">
+<h3>CSO Topographers format</h3>
+<p>The R package <strong>rPACI</strong> includes the function <code>readCSO</code> which is able to read a raw Placido disk corneal topography from a file that has been exported by certain corneal topographers. It has been specially designed for the file format exported from topographers manufactured by <a href="https://www.csoitalia.it">CSO</a> (Firenze, Italy): EyeTop2005, Sirius, Antares, or Osiris-T, among others.</p>
+<p>Nevertheless, the reading function <code>readCSO</code> has been designed to be more flexible, allowing to specify different parameters: the amounts of rings available, points per ring, and rings to use, whether to use or not only complete rings, and the value encoding NAs in the file. In addition, this function automatically processes the file and identifies the size and the header, without assuming a fixed structure or having to specify its size as a parameter.</p>
+<p>To use <strong>rPACI</strong>’s <code>readCSO</code>, the raw measurement file exported by a corneal topographer should have the following structure:</p>
+<ul>
+<li>A header with meta-data: patient data, optical measurements, date of exploration, etc. Its size depends on the device. For CSO topographers, the header typically has 24 lines. The function used in <strong>rPACI</strong> to read the files, <code>readCSO</code>, is able to detect the header lines (those that do not contain only real numbers) and to skip them.</li>
+<li>A list of size <span class="math inline">\(N_R \times N_A\)</span> with the <span class="math inline">\(\rho\)</span> coordinate (distance to the origin in polar coordinates, measured in mm) of the digitized points, at equally spaced angles (<span class="math inline">\(\theta\)</span>, the argument in polar coordinates). The <span class="math inline">\(\theta\)</span> coordinate is inferred from the position (assuming a uniform distribution), as it is not explicitly given in the data file.</li>
+<li>A list of size <span class="math inline">\(N_R \times N_A\)</span> with the <span class="math inline">\(z\)</span> coordinate, which can be altitude (elevation) or curvature, depending on the topographer and the exportation settings. These data are post-processed by the device using different algorithms, not directly measured, and the <span class="math inline">\(z\)</span> values are not used in <strong>rPACI</strong>.</li>
+</ul>
+<p>More details about using <code>readCSO</code> and the rest of the <strong>rPACI</strong> package can be found in <a href="packageUsage.html">Workflow of the rPACI package</a>.</p>
+<p>The next table shows the data file format required by <strong>rPACI</strong>’s <code>readCSO</code>, each row represents a line, and the file should be a plain text document (with any extension, not necessarily <em>‘.txt’</em>). In the file, <span class="math inline">\(\rho\)</span> values will be positive real numbers, and <span class="math inline">\(z\)</span> values will be real numbers.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Data file format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Header line 1</td>
+</tr>
+<tr class="even">
+<td>Header line 2</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+</tr>
+<tr class="even">
+<td>Header line n</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\rho_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho_2\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho_{N_A}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\rho_{(N_A+1)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho_{(N_A+2)}\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho_{(N_R \times N_A)}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(z_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(z_2\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(z_{N_A}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(z_{(N_A+1)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(z_{(N_A+2)}\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(z_{(N_R \times N_A)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>In the best scenario (which is not very common in the clinical practice), the <span class="math inline">\(N_R\)</span> rings are fully available, with <span class="math inline">\(N_A\)</span> points each, giving a total of <span class="math inline">\(N_R \times N_A\)</span> data points. However, many points are often missing, especially those corresponding to outermost rings (as they could not be digitized properly). Missing data are generally codified in the file with a specific number (such as “-1” or “-1000”) in the data file. Thus, these values do not correspond to real measurements and should be removed. These values are substituted by <code>NA</code> when reading the file using <strong>rPACI</strong>’s <code>readCSO</code>.</p>
+<p>The indices available in the <strong>rPACI</strong> package make use only of the <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\theta\)</span> coordinates, discarding the post-processed data in <span class="math inline">\(z\)</span>. Also, incomplete rings are not taken into account for the calculation of the indices by default. They can, but they are usually highly affected by noise and measurement errors, and their use could distort the results.</p>
+</div>
+<div id="rpaci-dataset-format" class="section level3">
+<h3>rPACI Dataset Format</h3>
+<p>In addition, the R package <strong>rPACI</strong> includes also the functions <code>readrPACI</code> which is able to read a file structured in the same way as the datasets used in the package. A file of this type is built using <code>writerPACI</code> over an <strong>rPACI</strong> dataset, which may have been obtained reading data from a file in other formats (e.g. using <code>readCSO</code>), or by simulation (with <code>simulateData</code>).</p>
+<p>Assuming there are <span class="math inline">\(N\)</span> full rings in the dataset and <span class="math inline">\(N_A\)</span> points in each ring, the file structure would be that of the table below. If the file was saved from a dataset generated using <code>simulateData</code>, the header contains the simulation parameters, that are recovered as attributes of the <code>data.frame</code> when reading the file again.</p>
+<!-- The functions `readrPACI` and `writerPACI` are more flexible, though, and they can manage datasets with incomplete rings or a different number of points in each ring. -->
+<table>
+<thead>
+<tr class="header">
+<th>Data file format</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Header line 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Header line 2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Header line n</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>“x”</td>
+<td>“y”</td>
+<td>“ring index”</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(y_1\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_2\)</span></td>
+<td><span class="math inline">\(y_2\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_3\)</span></td>
+<td><span class="math inline">\(y_3\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{N_A}\)</span></td>
+<td><span class="math inline">\(y_{N_A}\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{(N_A+1)}\)</span></td>
+<td><span class="math inline">\(y_{(N_A+1)}\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{(N_A+2)}\)</span></td>
+<td><span class="math inline">\(y_{(N_A+2)}\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{(2 N_A)}\)</span></td>
+<td><span class="math inline">\(y_{(2 N_A)}\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{((N-1) \times N_A + 1)}\)</span></td>
+<td><span class="math inline">\(y_{((N-1) \times N_A + 1)}\)</span></td>
+<td><span class="math inline">\(N\)</span></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{(N \times N_A)}\)</span></td>
+<td><span class="math inline">\(y_{(N \times N_A)}\)</span></td>
+<td><span class="math inline">\(N\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-espinosa2013" class="csl-entry">
+Espinosa, Julián, David Mas, Jorge Pérez, and Ana Belén. Roig. 2013. <span>“Open-Access Operating Algorithms for Commercial Videokeratographer and Improvement of Corneal Sampling.”</span> <em>Applied Optics</em> 52 (7): C24–29. <a href="https://doi.org/10.1364/AO.52.000C24">https://doi.org/10.1364/AO.52.000C24</a>.
+</div>
+<div id="ref-fan2018" class="csl-entry">
+Fan, R., T. C. Chan, G Prakash, and V. Jhanji. 2018. <span>“Applications of Corneal Topography and Tomography: A Review.”</span> <em>Clinical &amp; Experimental Ophthalmology</em> 46 (2): 133–46. <a href="https://doi.org/10.1111/ceo.13136">https://doi.org/10.1111/ceo.13136</a>.
+</div>
+<div id="ref-pinero2015" class="csl-entry">
+Piñero, D. P. 2015. <span>“Technologies for Anatomical and Geometric Characterization of the Corneal Structure and Anterior Segment: A Review.”</span> <em>Seminars in Ophthalmology</em> 30 (3): 161–70. <a href="https://doi.org/10.3109/08820538.2013.835844">https://doi.org/10.3109/08820538.2013.835844</a>.
+</div>
+<div id="ref-dramoslopez2013" class="csl-entry">
+Ramos-López, Darío, Andrei Martínez-Finkelshtein, Gracia M. Castro-Luna, Neus Burguera-Giménez, Alfredo Vega-Estrada, David Piñero, and Jorge L. Alió. 2013. <span>“Screening Subclinical Keratoconus with Placido-Based Corneal Indices.”</span> <em>Optometry and Vision Science</em> 90 (4): 335–43. <a href="https://doi.org/10.1097/opx.0b013e3182843f2a">https://doi.org/10.1097/opx.0b013e3182843f2a</a>.
+</div>
+<div id="ref-dramoslopez2011" class="csl-entry">
+Ramos-López, Darío, Andrei Martínez-Finkelshtein, Gracia M. Castro-Luna, David Piñero, and Jorge L. Alió. 2011. <span>“Placido-Based Indices of Corneal Irregularity.”</span> <em>Optometry and Vision Science</em> 88 (10): 1220–31. <a href="https://doi.org/10.1097/opx.0b013e3182279ff8">https://doi.org/10.1097/opx.0b013e3182279ff8</a>.
+</div>
+<div id="ref-rowsey1981" class="csl-entry">
+Rowsey, J. James, A. E. Reynolds, and Randy Brown. 1981. <span>“Corneal Topography: Corneascope.”</span> <em>Archives of Ophthalmology</em> 99 (6): 1093–1100. <a href="https://doi.org/10.1001/archopht.1981.03930011093022">https://doi.org/10.1001/archopht.1981.03930011093022</a>.
+</div>
+<div id="ref-samapunphong1998" class="csl-entry">
+Samapunphong, Sopit, and Dimitri Azar. 1998. <span>“Placido and Elevation-Based Corneal Topography. A Review.”</span> <em>Ophthalmology Clinics of North America</em> 11 (3): 311–29. <a href="https://doi.org/10.1016/S0896-1549(05)70059-6">https://doi.org/10.1016/S0896-1549(05)70059-6</a>.
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>If both anterior (front) and posterior (rear) corneal surfaces are measured, only the anterior surface value is reported here.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Calculated or estimated from the two previous columns<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
