@@ -47,7 +47,7 @@ results_N
 # Generate a sample dataset
 dataset = simulateData(rings = 12, maximumMireDisplacement = 0.2, mireDisplacementAngle = 50)
 
-# Analyze the datatset
+# Analyze the dataset
 res_dataset = analyzeDataset(dataset = dataset)
 res_dataset
 

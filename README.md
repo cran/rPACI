@@ -1,10 +1,12 @@
 # rPACI
 
   This Github repository is devoted to the development of the R package **rPACI** (R Placido Analysis of Corneal Irregularity), also available in the [the CRAN repository](https://cran.r-project.org/package=rPACI).
+  
+  Check out the [rPACI shiny app](https://admaldonado.shinyapps.io/rpaci).
 
   ## Contributors
   The contributors/developers of this project are:
-  * Darío Ramos-López,  Rey Juan Carlos University, Spain.  dario.ramos.lopez at urjc.es
+  * Darío Ramos-López, University of Almería, Spain. dramoslopez at ual.es
   * Ana D. Maldonado, University of Almería, Spain. ana.d.maldonado at ual.es
   
   To contribute to the package, report a bug, or any other issues, please use our [GitHub repository rPACI](https://github.com/dariorlual/rPACI).
